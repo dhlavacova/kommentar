@@ -1,0 +1,18 @@
+h1 {
+    color: black;
+}
+
+body {
+    background: #d2cfcf;
+    margin: 0px;
+
+}
+
+.komentar div {
+    margin: 15px 0 15px 4%;
+    padding: 2%;
+    background: #fff;
+    width: 40%;
+    float: left;
+
+}
