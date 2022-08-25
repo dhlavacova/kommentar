@@ -1,29 +1,29 @@
 $(function () {
-    vypis_komentar();
-    uloz_do_DB();
+    kommentar_auschreiben();
+    data_speichern_DB();
 });
-let textarea;
+let kommentar;
 
-function vypis_komentar() {
+function kommentar_auschreiben() {
 
-    $('#tlacitko').on('click', function () {
+    $('#button').on('click', function () {
 
-        textarea = $('#zprava').val();
-        let novaZprava = `<div class="p-2">${textarea}</div>`;
+        kommentar = $('#text').val();
+        let neuer_kommentar = `<div class="p-2">${kommentar}</div>`;
 
-      $('.komentare').append(novaZprava);
-        $('#zprava').val('');// es leert Textarea
+      $('.komentare').append(neuer_kommentar);
+        $('#text').val('');// es leert Textarea
     })
 }
 
-function uloz_do_DB() {
+function data_speichern_DB() {
 
-    $('#tlacitko').on('click', function (event) {
+    $('#button').on('click', function (event) {
         event.preventDefault();
         $.ajax({
             type: 'POST',
             url: "komentar_DB.php",
-            data: {data: textarea},
+            data: {data: kommentar},
            //  success: function(data) {
            //      //if request if made successfully then the response represent the data
            //

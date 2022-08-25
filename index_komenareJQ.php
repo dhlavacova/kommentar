@@ -21,7 +21,7 @@
         <div class="komentare d-flex flex-column mb-3">
 
   <?php
-           include('komentar_DB.php');//Načtení souboru   ?>
+           include('komentar_DB.php');// die Kommentaren werden aus DB (PHP) eingelesen ?>
 
         </div>
         <div class="row">
@@ -29,10 +29,10 @@
                 <form action="" method="post">
                     <label>Deine Nachricht:</label>
                     <br>
-                    <textarea id="zprava" placeholder="Dein Kommentar :)" rows="4" cols="50"></textarea>
+                    <textarea id="text" placeholder="Dein Kommentar :)" rows="4" cols="50"></textarea>
                     <br>
 
-                    <button id="tlacitko" type="button" class="btn btn-primary">Absenden</button>
+                    <button id="button" type="button" class="btn btn-primary">Absenden</button>
 
                 </form>
 

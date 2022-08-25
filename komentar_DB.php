@@ -12,7 +12,7 @@ try {
 } catch (PDOException $e) {
     die($e->getMessage());
 }
-//ulozeni dat (komentare) do databaze
+// Die Data (Kommentaren) werden in DB gespeichert
 if (isset($_POST['data']) && ($_POST['data'] !== '')) {
     $data = $_POST['data'];
     $statement = $pdo->prepare(
@@ -20,9 +20,9 @@ if (isset($_POST['data']) && ($_POST['data'] !== '')) {
     );
     $statement->execute([$data]);
 }
-//vytahnuti dat komentaru z databaze
-$stmt = $pdo->query("SELECT kommentar_text FROM kommentar.kommentar");//Připravení dotazu
-$vystup = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Die Kommentaren sind aus DB erhielten
+$stmt = $pdo->query("SELECT kommentar_text FROM kommentar.kommentar");
+$vystup = $stmt->fetchAll(PDO::FETCH_ASSOC); // Erhalt alle kommentaren (fetch - nur 1 Kommentar)
 foreach($vystup as $data){
     echo '<div class="p-2">'. $data['kommentar_text'] .'<br>' . '</div>';
 }
