@@ -21,8 +21,14 @@ if (isset($_POST['data']) && ($_POST['data'] !== '')) {
     $statement->execute([$data]);
 }
 // Die Kommentaren sind aus DB erhielten
-$stmt = $pdo->query("SELECT kommentar_text FROM kommentar.kommentar");
+$stmt = $pdo->query("SELECT kommentar_text, id  FROM kommentar.kommentar");
 $vystup = $stmt->fetchAll(PDO::FETCH_ASSOC); // Erhalt alle kommentaren (fetch - nur 1 Kommentar)
 foreach($vystup as $data){
-    echo '<div class="p-2">'. $data['kommentar_text'] .'<br>' . '</div>';
+    $pocetLike = 0; // TODO ziskat pocet liku
+    echo '<div class=" beitrag p-2 ">'. (strip_tags($data['kommentar_text'])) . '<br>' .
+            "<div id = '{$data['id']}'>
+                <img src='img/like.svg' class='like' alt='like' width= '15' height='12' >
+                <span class='like_count'>$pocetLike</span>
+            </div>
+        </div>";
 }

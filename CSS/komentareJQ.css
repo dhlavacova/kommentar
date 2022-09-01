@@ -8,11 +8,12 @@ body {
 
 }
 
-.komentar div {
-    margin: 15px 0 15px 4%;
-    padding: 2%;
-    background: #fff;
-    width: 40%;
-    float: left;
+
+
+.beitrag {
+
+    background-color: white;
+    margin: 8px;
+    box-shadow: 5px 5px 3px #888
 
 }
