@@ -13,8 +13,8 @@ function kommentar_auschreiben() {
         kommentar = $('#text').val();
 
 
-        let neuer_kommentar = `<div class= 'beitrag p-2'>${kommentar}<div><img src="img/like.svg" alt="like" width= "15" height="12"> <div id="">
-    </div></div></div>`;
+        let neuer_kommentar = `<div class= 'beitrag p-2'>${kommentar}<div class="like"><span class='like_count'>0</span> 
+    </div></div>`;
 
         $('.komentare').append(neuer_kommentar);
         $('#text').val('');// es leert Textarea
@@ -24,13 +24,13 @@ function kommentar_auschreiben() {
 function data_speichern_DB() {
 
     $('#button').on('click', function (event) {
-        event.preventDefault();
+
         $.ajax({
             type: 'POST',
             url: "komentar_DB.php",
-            data: {data: kommentar},
+            data: {'data': kommentar},
             //  success: function(data) {
-            //      //if request if made successfully then the response represent the data
+            //      //Wenn die Anfrage erfolgreich ausgeführt wird, repräsentiert die Antwort die Daten
             //
             //      $(".komentare").append(data);
             // }
@@ -40,14 +40,32 @@ function data_speichern_DB() {
 
 function like() {
     $('.like').on('click', function () {
-        let id = $(this).parent().attr('id');//najde v rodici id cislo
+        let id = $(this).attr('id');//najde v rodici id cislo
         let likeElement = $(this); // vytahne v kterem elementru jsi...pomuze proti dvojimu kliknuti
-        let likeCountElement = $(this).parent().children('.like_count'); //vyjdu na rodice a z rodice hledam dite kolik ma like
+        let likeCountElement = $(this).children('.like_count'); //vyjdu na rodice a z rodice hledam dite kolik ma like
 
         let count = likeCountElement.text(); // v count mam ulozeny aktualni pocet bodu
+// hasClass ma tridu aktivni pak odecti, jinak pricti
+        var odesli=0;
 
-        likeCountElement.text(++count); //vypise pocet like
+if ($(this).hasClass('active')){
+    --count;
+    odesli=0;
+}
+else {
+    ++count;
+    odesli=1;
+}
+        likeCountElement.text(count); //vypise pocet like
 
+        $(this).toggleClass('active');
+
+
+        $.ajax({
+            type: 'POST',
+            url: 'komentar_DB.php',
+            data: {'id': id, 'odesli':odesli},
+        })
         // TODO 1. ajax, stejne jako v data_speichern_DB, poslu ID a COUNT
 
         // Chces ulozit like do databaze?
