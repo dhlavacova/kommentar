@@ -22,13 +22,13 @@ body {
     cursor: pointer;
     background: url("../img/like.svg") no-repeat center ;
     background-size: 100% 100% ;
-    width: 45px;
+    width: 70px;
     height: 20px;
 }
 .like.active{
     cursor: pointer;
     background: url("../img/black_like.svg") no-repeat center ;
     background-size: 100% 100% ;
-    width: 45px;
+    width: 70px;
     height: 20px;
 }

@@ -24,7 +24,7 @@ function kommentar_auschreiben() {
 function data_speichern_DB() {
 
     $('#button').on('click', function (event) {
-
+        location.reload()
         $.ajax({
             type: 'POST',
             url: "komentar_DB.php",
@@ -40,6 +40,7 @@ function data_speichern_DB() {
 
 function like() {
     $('.like').on('click', function () {
+
         let id = $(this).attr('id');//najde v rodici id cislo
         let likeElement = $(this); // vytahne v kterem elementru jsi...pomuze proti dvojimu kliknuti
         let likeCountElement = $(this).children('.like_count'); //vyjdu na rodice a z rodice hledam dite kolik ma like
