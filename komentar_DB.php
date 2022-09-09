@@ -17,11 +17,13 @@ try {
 // Die Data (Kommentaren) werden in DB gespeichert
 
 if (isset($_POST['data']) && ($_POST['data'] !== '')) {
-    $data = $_POST['data'];
+    $data =htmlspecialchars( $_POST['data']);
     $statement = $pdo->prepare(
         "INSERT INTO kommentar.kommentar (kommentar_text,daumen, active_like) VALUE (?,?,?)"
     );
     $statement->execute([$data, 0, 0]);
+    echo $pdo->lastInsertId();
+    die();
 }
 
 //die like wird gespeichert

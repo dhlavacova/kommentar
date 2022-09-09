@@ -1,6 +1,5 @@
 $(function () {
     kommentar_auschreiben();
-    data_speichern_DB();
     like();
 });
 let kommentar;
@@ -12,38 +11,33 @@ function kommentar_auschreiben() {
 
         kommentar = $('#text').val();
 
-
-        let neuer_kommentar = `<div class= 'beitrag p-2'>${kommentar}<div class="like"><span class='like_count'>0</span> 
-    </div></div>`;
+        let neuer_kommentar = $(`<div class= 'beitrag p-2'><span class="text"></span><div class="like"><span class='like_count'>0</span> 
+    </div></div>`);
+        neuer_kommentar.children('.text').text(kommentar);
 
         $('.komentare').append(neuer_kommentar);
         $('#text').val('');// es leert Textarea
-    })
-}
 
-function data_speichern_DB() {
-
-    $('#button').on('click', function (event) {
-        location.reload()
         $.ajax({
             type: 'POST',
             url: "komentar_DB.php",
             data: {'data': kommentar},
-            //  success: function(data) {
-            //      //Wenn die Anfrage erfolgreich ausgeführt wird, repräsentiert die Antwort die Daten
-            //
-            //      $(".komentare").append(data);
-            // }
+            success: function(data) {
+
+                //Wenn die Anfrage erfolgreich ausgeführt wird, repräsentiert die Antwort die Daten
+                neuer_kommentar.prop('id', data);
+                like();
+            }
         })
-    });
+    })
 }
 
 function like() {
-    $('.like').on('click', function () {
+    $('.like').off('click').on('click', function () {
 
         let id = $(this).attr('id');//najde v rodici id cislo
         let likeElement = $(this); // vytahne v kterem elementru jsi...pomuze proti dvojimu kliknuti
-        let likeCountElement = $(this).children('.like_count'); //vyjdu na rodice a z rodice hledam dite kolik ma like
+        let likeCountElement = $(this).find('.like_count'); //vyjdu na rodice a z rodice hledam dite kolik ma like
 
         let count = likeCountElement.text(); // v count mam ulozeny aktualni pocet bodu
 // hasClass ma tridu aktivni pak odecti, jinak pricti
